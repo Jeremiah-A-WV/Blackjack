@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Start extends World
 {
+    GreenfootSound defaultMusic = new GreenfootSound("Gimme_Gimme.mp3");
 
     /**
      * Constructor for objects of class Start.
@@ -19,5 +20,6 @@ public class Start extends World
         super(600, 400, 1); 
         Button startButton = new Button("startButton.png", 100, 60); // Enter image path
         addObject(startButton, 100, 100);
+        defaultMusic.playLoop();
     }
 }
