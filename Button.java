@@ -9,11 +9,21 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Button extends Actor
 {
     private World link;
+    
+    // Linked buttons
     public Button(String image, int width, int height, World link) {
         GreenfootImage display = new GreenfootImage(image);
         display.scale(width, height);
         setImage(display);
         this.link = link;
+    }
+    
+    
+    // TO BE IMPLEMENTED LATER -- COMMAND BUTTONS ("HIT", "STAND", etc.)
+    public Button(String image, int width, int height) {
+        GreenfootImage display = new GreenfootImage(image);
+        display.scale(width, height);
+        setImage(display);
     }
     
     /**
