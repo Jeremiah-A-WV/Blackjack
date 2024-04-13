@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Button extends Actor
 {
     private World link;
+    GreenfootSound buttonSound = new GreenfootSound("Button_Click.mp3");
     
     // Linked buttons
     public Button(String image, int width, int height, World link) {
@@ -35,6 +36,7 @@ public class Button extends Actor
         // If this Button is clicked, set world to the link
         if (Greenfoot.mouseClicked(this)) {
             Greenfoot.setWorld(this.link);
+            buttonSound.play();
         }
     }
 }
