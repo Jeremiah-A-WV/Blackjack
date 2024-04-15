@@ -37,11 +37,14 @@ public class RulesWorld extends World
          * turn and you pick another card, and a Stand is when you
          * decide to pass, keeping your current deck.
          */
-        this.showText("\u25cf But there's a twist!", 165, 350);
+        this.showText("\u25cf On your turn, you can:", 180, 350);
+        this.showText("\u25cf \"Hit\" -- take a card from the deck", 300, 400);
+        this.showText("\u25cf \"Stand\" -- pass, and keep your current deck", 355, 450);
+        this.showText("\u25cf But there's a twist!", 165, 500);
         /* But there's a twist!
          * Diamond cards utilize multiplication instead of addition
          * so be wary when you decide to Hit.
          */
-        this.showText("\u25cf Diamond cards use multiplication", 295, 400);
+        this.showText("\u25cf Diamond cards use multiplication", 295, 550);
     }
 }
