@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Game extends World
 {
-
+    GreenfootImage defaultGameScreen = new GreenfootImage("jazzGameScreen.png");
     /**
      * Constructor for objects of class Game.
      * 
@@ -16,7 +16,8 @@ public class Game extends World
     public Game()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1);
-        this.showText("Game screen", 300, 200);
+        super(800, 600, 1);
+        setBackground(defaultGameScreen);
+        
     }
 }
