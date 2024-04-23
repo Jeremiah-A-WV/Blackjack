@@ -1,5 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Random;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Write a description of class Deck here.
@@ -9,60 +12,48 @@ import java.util.Random;
  */
 public class Deck extends Actor
 {
-    private Card[] cards;
-    private int numOfCards;
+    private List<Card> cards;
 
     public Deck(){
-        cards = new Card[1];
-        numOfCards = 0;
+        cards = new ArrayList<Card>();
     }
     
     public Deck(int numOfDecks){
-        numOfCards = numOfDecks*52;
-        cards = new Card[numOfCards];
-        int index = 0;
+        int numOfCards = numOfDecks*52;
+        cards = new ArrayList<Card>(numOfCards);
+        //int index = 0;
         for (int deckCount=0; deckCount < numOfDecks; deckCount++) {
             for(Suit suit: Suit.values()){
                 for(Rank rank: Rank.values()){
                     if (rank == Rank.JOKER){
                         continue;
                     }
-                    cards[index++] = new Card(rank,suit);
+                    cards.add(new Card(rank,suit));
                 }
             }
         }
         shuffle();
         if (numOfCards > 0){
-            setImage(cards[numOfCards-1].getImage());
+            setImage(cards.get(numOfCards-1).getImage());
         }
     }
 
     public void shuffle(){
         Random rand = new Random();
+        int numOfCards = cards.size();
         for(int index = 0; index < numOfCards-1; index++){
             int swapIndex = rand.nextInt(numOfCards-index) + index;
-            Card temp = cards[index];
-            cards[index] = cards[swapIndex];
-            cards[swapIndex] = temp;
+            Card temp = cards.get(index);
+            cards.add(index, cards.get(swapIndex));
+            cards.add(swapIndex, temp);
         }
-    }
-
-    /**
-     * Grows the cards array by doubling the size of the array.
-     */
-    private void grow(){
-        Card[] tempCards = new Card[cards.length*2];
-        for(int index=0; index < numOfCards; index++){
-            tempCards[index] = cards[index];
-        }
-        cards = tempCards;
     }
 
     /**
      * Returns true if this deck is empty; otherwise true.
      */
     public boolean isEmpty(){
-        return numOfCards == 0;
+        return cards.isEmpty();
     }
 
     /**
@@ -73,22 +64,7 @@ public class Deck extends Actor
      * @param aCard an instance of a Card to be removed from the deck.
      */
     public boolean remove(Card aCard){
-        boolean isFound = false;
-        for(int index = 0; index < numOfCards; index++){
-            if (isFound){
-                cards[index-1] = cards[index];
-            } else {
-                if (cards[index].equals(aCard)){
-                    isFound = true;
-                }
-            }
-        }
-        if (isFound){
-            numOfCards--;
-            cards[numOfCards] = null;
-            setImage(cards[numOfCards-1].getImage());
-        }
-        return isFound;
+        return cards.remove(aCard);
     }
 
     /**
@@ -97,14 +73,7 @@ public class Deck extends Actor
      * @param aCard an instance of a Card that is to be added to this deck.
      */
     public void add(Card aCard){
-        if (numOfCards >= cards.length){
-            grow();
-        }
-        cards[numOfCards] = aCard;
-        numOfCards++;
-        if (numOfCards > 0){
-            setImage(cards[numOfCards-1].getImage());
-        }
+        cards.add(aCard);
     }
 
     /**
@@ -125,10 +94,7 @@ public class Deck extends Actor
      * Deals a card from this deck by returning the top card on this deck.
      */
     public Card deal(){
-        Card topCard = cards[numOfCards-1];
-        cards[numOfCards-1] = null;
-        numOfCards--;
-        return topCard;
+        return cards.remove(cards.size()-1);
     }
 
     /**
@@ -153,7 +119,7 @@ public class Deck extends Actor
      * @returns number of cards in this deck.
      */
     public int getSize(){
-        return numOfCards;
+        return cards.size();
     }
 
     /**
@@ -161,8 +127,8 @@ public class Deck extends Actor
      * 
      * @returns a reference to the array of cards in this deck.
      */
-    protected Card[] getCards(){
-        return cards;    
+    protected List<Card> getCards(){
+        return cards;
     }
     
     @Override

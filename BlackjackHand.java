@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class BlackjackHand here.
@@ -7,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @version (a version number or a date)
  */
 public class BlackjackHand extends Hand
-{   public static final int BLACKJACK = 22;
+{   public static final int BLACKJACK = 41;
     public static final int BUST = -1;
 
     private int weight;
@@ -26,27 +27,7 @@ public class BlackjackHand extends Hand
      * Returns the weight of the card based on the rules of Blackjack.
      */
     private int getWeight(Rank rank){
-        // NOTE: This can be implemented with an multibranch if-else statement.
-        switch(rank){
-            case ACE:
-                return 11;
-            case TWO:
-            case THREE:
-            case FOUR:
-            case FIVE:
-            case SIX:
-            case SEVEN:
-            case EIGHT:
-            case NINE:
-                return rank.getRank();
-            case TEN:
-            case JACK:
-            case QUEEN:
-            case KING:
-                return 10;
-            default:
-                return 0;
-        }
+        return rank.getRank();
     }
 
     /**
@@ -54,19 +35,19 @@ public class BlackjackHand extends Hand
      */
     private void calculateWeight(){
         int[] weight = {0, 0};
-        Card[] cards = getCards();
+        List<Card> cards = getCards();
         int numOfCards = getSize();
 
-        for(int index = 0; index < numOfCards; index++){
-            if (!cards[index].isFaceUp()){
+        for(Card card: cards){
+            if (!card.isFaceUp()){
                 continue;  // if the card is face down don't include in weight
             }
-            int currentCardValue = getWeight(cards[index].getRank());
-            if (cards[index].getRank() != Rank.ACE){
+            int currentCardValue = getWeight(card.getRank());
+            if (card.getRank() != Rank.ACE){
                 weight[0] += currentCardValue;
                 weight[1] += currentCardValue;
             } else {
-                if (11+Math.max(weight[0],weight[1]) > 21){
+                if (11+Math.max(weight[0],weight[1]) > 40){
                     int minWeight = Math.min(weight[0],weight[1]);
                     weight[0] = 1 + minWeight;
                     weight[1] = 11 + minWeight;
@@ -78,11 +59,11 @@ public class BlackjackHand extends Hand
         }
         // calculate the weight of the hand
         this.weight = Math.max(weight[0],weight[1]);
-        if (this.weight > 21){
+        if (this.weight > 40){
             this.weight = Math.min(weight[0],weight[1]);
         }
         // check for Blackjack or Bust
-        if (this.weight > 21){
+        if (this.weight > 40){
             this.weight = BUST;
         } else if (getSize() == 2 && this.weight == 21){
             this.weight = BLACKJACK;

@@ -15,10 +15,11 @@ public class Start extends World
      * 
      */
     public Start()
-    {    
+    {
+
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(800, 600, 1); 
-        Button startButton = new Button("startButton.png", 100, 60, new Game()); // Enter image path
+        StartButton startButton = new StartButton(new Game()); // Enter image path
         addObject(startButton, 400, 300);
         defaultMusic.playLoop();
     }
