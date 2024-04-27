@@ -6,9 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class BackButton extends LinkedSmallButton
+public class BackButton extends SmallButton
 {
     public BackButton (World link) {
-        super("BackButton.png", link);
+        super(link);
     }
 }

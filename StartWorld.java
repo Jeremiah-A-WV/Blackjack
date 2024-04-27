@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class StartWorld extends World
 {
-    GreenfootSound defaultMusic = new GreenfootSound("Gimme_Gimme.mp3");
+    GreenfootSound music = new GreenfootSound("Gimme_Gimme.mp3");
     /**
      * Constructor for objects of class StartWorld.
      * 
@@ -17,10 +17,12 @@ public class StartWorld extends World
     {    
         // Create a new world with 1100x619 cells with a cell size of 1x1 pixels.
         super(1100, 619, 1); 
-        LinkedBigButton startButton = new LinkedBigButton("StartButton.png", new GameWorld());
-        LinkedBigButton rulesButton = new LinkedBigButton("RulesButton.png", new RulesWorld(this));
+        BigButton startButton = new BigButton("StartButton.png", new GameWorld());
+        BigButton rulesButton = new BigButton("RulesButton.png", new RulesWorld(this));
+        BigButton optionsButton = new BigButton("OptionsButton.png", new OptionsWorld(this, music));
         addObject(startButton, 550, 400);
         addObject(rulesButton, 990, 550);
-        defaultMusic.playLoop();
+        addObject(optionsButton, 550, 490);
+        music.playLoop();
     }
 }
