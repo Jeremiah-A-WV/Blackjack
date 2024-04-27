@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 /**
  * Write a description of class Hand here.
@@ -44,20 +45,20 @@ public class Hand extends Deck
      */
     protected void setImage() 
     {
-        Card[] cards = getCards();
-        int numOfCards = getSize();
+        List<Card> cards = getCards();
+        int numOfCards = cards.size();
         if (numOfCards > 0){
-            GreenfootImage cardImage = cards[0].getImage();
+            GreenfootImage cardImage = cards.get(0).getImage();
             int height = cardImage.getHeight();
             int width = cardImage.getWidth();
             int heightInc = (int)(height * .1);
-            int widthInc = (int)(width * .15) ;
+            int widthInc = (int)(width * .1) ;
             GreenfootImage image = new GreenfootImage(width + widthInc*numOfCards, 
                                                         height+heightInc*numOfCards);
             int x = 0;
             int y = 0;
-            for(int index = 0; index < numOfCards; index++){
-                image.drawImage(cards[index].getImage(),x,y);
+            for(Card card: cards){
+                image.drawImage(card.getImage(),x,y);
                 x += widthInc;
                 y += heightInc;
             }
@@ -92,10 +93,9 @@ public class Hand extends Deck
      */
     public void show()
     {
-        Card[] cards = getCards();
-        int numOfCards = getSize();
-        for(int index = 0; index < numOfCards; index++){
-            cards[index].show();
+        List<Card> cards = getCards();
+        for(Card card: cards){
+            card.show();
         }
         setImage();
     }
@@ -105,10 +105,9 @@ public class Hand extends Deck
      */
     public void hide()
     {
-        Card[] cards = getCards();
-        int numOfCards = getSize();
-        for(int index = 0; index < numOfCards; index++){
-            cards[index].hide();
+        List<Card> cards = getCards();
+        for(Card card: cards){
+            card.hide();
         }
         setImage();
     }

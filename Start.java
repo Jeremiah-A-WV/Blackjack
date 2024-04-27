@@ -8,8 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Start extends World
 {
-    GreenfootSound defaultMusic = new GreenfootSound("Gimme_Gimme.mp3");
-
     /**
      * Constructor for objects of class Start.
      * 
@@ -17,9 +15,8 @@ public class Start extends World
     public Start()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(800, 600, 1); 
-        Button startButton = new Button("startButton.png", 100, 60, new Game()); // Enter image path
-        addObject(startButton, 400, 300);
-        defaultMusic.playLoop();
+        super(1100, 800, 1); 
+        Button button = new StartButton("startButton.png", 100, 60, new Game()); // Enter image path
+        addObject(button, 550, 400);
     }
 }
