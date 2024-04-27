@@ -9,34 +9,26 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Button extends Actor
 {
     private World link;
-    GreenfootSound buttonSound = new GreenfootSound("Button_Click.mp3");
     
-    public Button() {
-        
-    }
-     
-    // Linked button
-    public Button (int width, int height, World link) {
+    public Button (int width, int height) {
         this.getImage().scale(width, height);
         setImage(this.getImage());
+    }
+    
+    public Button (String imageName, int width, int height) {
+        setImage(imageName);
+        this.getImage().scale(width, height);
+    }
+    
+    public void setLink(World link) {
         this.link = link;
     }
     
-    // Linked buttons
-    public Button(String image, int width, int height, World link) {
-        GreenfootImage display = new GreenfootImage(image);
-        display.scale(width, height);
-        setImage(display);
-        this.link = link;
+    public World getLink() {
+        return link;
     }
     
-    
-    // TO BE IMPLEMENTED LATER -- COMMAND BUTTONS ("HIT", "STAND", etc.)
-    public Button(String image, int width, int height) {
-        GreenfootImage display = new GreenfootImage(image);
-        display.scale(width, height);
-        setImage(display);
-    }
+    public void onClick() {}
     
     /**
      * Act - do whatever the Button wants to do. This method is called whenever
@@ -45,12 +37,7 @@ public class Button extends Actor
     public void act()
     {
         if (Greenfoot.mouseClicked(this)) {
-            buttonSound.play();
             onClick();
         }
-    }
-    
-    public void onClick() {
-        
     }
 }
