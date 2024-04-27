@@ -23,6 +23,7 @@ public class BackButton extends Button
                 this.removeTouching(Item.class);
             }
             getWorld().removeObject(this);
+            
         }
     }
 }
