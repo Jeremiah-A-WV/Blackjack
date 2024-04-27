@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class LinkedSmallButton here.
+ * Write a description of class SmallButton here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -18,7 +18,7 @@ public class SmallButton extends Button
     }
     
     public SmallButton (String imageName, World link) {
-        super(imageName, 170, 80);
+        super(imageName, 80, 80);
         setLink(link);
     }
     

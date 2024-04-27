@@ -19,7 +19,7 @@ public class StartWorld extends World
         super(1100, 619, 1); 
         BigButton startButton = new BigButton("StartButton.png", new GameWorld());
         BigButton rulesButton = new BigButton("RulesButton.png", new RulesWorld(this));
-        BigButton optionsButton = new BigButton("OptionsButton.png", new OptionsWorld(this, music));
+        BigButton optionsButton = new BigButton("OptionsButton.png", new OptionsWorld(this));
         addObject(startButton, 550, 400);
         addObject(rulesButton, 990, 550);
         addObject(optionsButton, 550, 490);
