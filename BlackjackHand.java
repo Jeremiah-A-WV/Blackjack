@@ -20,7 +20,7 @@ public class BlackjackHand extends Hand
      */
     public BlackjackHand(String name){
         super(name);
-        weight = 0;
+        weight = 41;
     }
 
     /**
@@ -65,7 +65,7 @@ public class BlackjackHand extends Hand
         // check for Blackjack or Bust
         if (this.weight > 40){
             this.weight = BUST;
-        } else if (getSize() == 2 && this.weight == 21){
+        } else if (getSize() == 2 && this.weight == 41){
             this.weight = BLACKJACK;
         }
     }
