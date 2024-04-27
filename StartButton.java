@@ -22,7 +22,7 @@ public class StartButton extends Button
     {
         if (Greenfoot.mouseClicked(this)){
             defaultMusic.playLoop();
-            Greenfoot.setWorld(new Game());
+            Greenfoot.setWorld(getLink());
         }
     }
 }

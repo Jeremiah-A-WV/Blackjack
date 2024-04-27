@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Start extends World
 {
+    String playerName;
     /**
      * Constructor for objects of class Start.
      * 
@@ -16,7 +17,12 @@ public class Start extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1100, 800, 1); 
-        Button button = new StartButton("startButton.png", 100, 60, new Game()); // Enter image path
+        playerName = Greenfoot.ask("Please enter your name");
+        Button button = new StartButton("startButton.png", 100, 60, new Game(this)); // Enter image path
         addObject(button, 550, 400);
+    }
+    
+    public String getPlayerName() {
+        return playerName;
     }
 }

@@ -19,7 +19,7 @@ public class NewGameButton extends Button
     public void act()
     {
         if(Greenfoot.mouseClicked(this)){
-            Greenfoot.setWorld(new Game());
+            Greenfoot.setWorld(new Game(null));
         }
     }
 }

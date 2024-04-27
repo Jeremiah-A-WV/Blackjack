@@ -20,7 +20,6 @@ public class BlackjackHand extends Hand
      */
     public BlackjackHand(String name){
         super(name);
-        weight = 41;
     }
 
     /**
@@ -43,6 +42,11 @@ public class BlackjackHand extends Hand
                 continue;  // if the card is face down don't include in weight
             }
             int currentCardValue = getWeight(card.getRank());
+            
+            if (card.getSuit() == Suit.DIAMOND) {
+                currentCardValue *= card.getRank().getRank();
+            }
+            
             if (card.getRank() != Rank.ACE){
                 weight[0] += currentCardValue;
                 weight[1] += currentCardValue;
@@ -65,7 +69,7 @@ public class BlackjackHand extends Hand
         // check for Blackjack or Bust
         if (this.weight > 40){
             this.weight = BUST;
-        } else if (getSize() == 2 && this.weight == 41){
+        } else if (getSize() == 2 && this.weight == 40){
             this.weight = BLACKJACK;
         }
     }
