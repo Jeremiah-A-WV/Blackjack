@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Card extends Actor
 {
-    private static final double SCALE = 0.6;
     private Rank rank;
     private Suit suit;
     private GreenfootImage backImage;
@@ -38,7 +37,8 @@ public class Card extends Actor
         this.isFaceUp = isFaceUp;
         this.rank = rank;
         this.suit = suit;
-        backImage = new GreenfootImage("cardBack-abstract.png");
+        backImage = new GreenfootImage("CardBack.png");
+        backImage.scale(280,210);
         String suitName = "Clubs/clubs";
         switch (suit){
             case DIAMOND:

@@ -52,7 +52,7 @@ public class Hand extends Deck
             int height = cardImage.getHeight();
             int width = cardImage.getWidth();
             int heightInc = (int)(height * .1);
-            int widthInc = (int)(width * .15) ;
+            int widthInc = (int)(width * .1) ;
             GreenfootImage image = new GreenfootImage(width + widthInc*numOfCards, 
                                                         height+heightInc*numOfCards);
             int x = 0;
