@@ -12,13 +12,17 @@ public class BigButton extends Button
         super(170, 80);
     }
     
+    public BigButton (String imageName) {
+        super(imageName, 170, 80);
+    }
+    
     public BigButton(World link) {
         this();
         setLink(link);
     }
     
     public BigButton (String imageName, World link) {
-        super(imageName, 170, 80);
+        this(imageName);
         setLink(link);
     }
     
