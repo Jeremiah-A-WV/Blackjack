@@ -1,13 +1,13 @@
 /**
  * Write a description of class Suit here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jeremiah Whitehurst 
+ * @version 29-04-2024
  */
 public enum Suit  
 {
-    CLUB(0,"\u2663"), SPADE(1, "\u2660"),
-    HEART(2, "\u2665"), DIAMOND(3, "\u2666");
+    CLUB(0,"clubs"), SPADE(1, "spades"),
+    HEART(2, "hearts"), DIAMOND(3, "diamonds");
 
     private int value;
     private String rep;

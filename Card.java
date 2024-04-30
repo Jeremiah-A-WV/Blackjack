@@ -3,117 +3,62 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Card here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jeremiah Whitehurst 
+ * @version 29-04-2024
  */
 public class Card extends Actor
 {
-    private Rank rank;
+    private final GreenfootImage BACK_OF_CARD = new GreenfootImage("cards/misc/red_back.png");
+    
     private Suit suit;
-    private GreenfootImage backImage;
-    private GreenfootImage faceImage;
-    private boolean isFaceUp;
+    private Rank rank;
+    private boolean isShowing;
+    GreenfootImage frontOfCard;
     
-    /**
-     * Constructor that initializes an instance of Card to the specified rank and suit.
-     * 
-     * @param rank Rank to set this instance of Card
-     * @param suit Suit to set this instance of Card
-     */
-    public Card(Rank rank, Suit suit)
-    {
-        this(rank, suit, false);
-    }
-    
-    /**
-     * Constructor that initializes an instance of Card to the specified rank and suit.
-     * if isFaceUp is true, then the card is shown face up with the rank and suit exposed.
-     * 
-     * @param rank Rank to set this instance of Card
-     * @param suit Suit to set this instance of Card
-     * @param isFaceUp a boolean value.  If true this card is shown face up; otherwise face down.
-     */
-    public Card(Rank rank, Suit suit, Boolean isFaceUp){
-        this.isFaceUp = isFaceUp;
-        this.rank = rank;
+    public Card(Suit suit, Rank rank) {
+        this.isShowing = isShowing;
         this.suit = suit;
-        backImage = new GreenfootImage("CardBack.png");
-        backImage.scale(280,210);
-        String suitName = "Clubs/clubs";
-        switch (suit){
-            case DIAMOND:
-                suitName = "Diamonds/diamonds";
-                break;
-            case SPADE:
-                suitName = "Spades/spades";
-                break;
-            case HEART:
-                suitName = "Hearts/hearts";
-                break;
-        }
-        faceImage = new GreenfootImage(suitName+"_"+rank.getRank()+".png");
-        if (isFaceUp){
-            setImage(faceImage);
-        } else {
-            setImage(backImage);
-        }
+        this.rank = rank;
+        this.isShowing = false;
+        
+        frontOfCard = new GreenfootImage("cards/" + this.suit + "/" + this.rank + "_of_" + this.suit + ".png");
+        frontOfCard.scale(100, 145);
+        BACK_OF_CARD.scale(100, 145);
+        setImage(BACK_OF_CARD);
     }
     
-    /**
-     * Sets this card to face up and sets it's image to display the rank and suit.
-     */
-    public void show()
-    {
-        isFaceUp = true;
-        setImage(faceImage);
+    public Suit getSuit() {
+        return suit;
     }
-
-    /**
-     * Sets this card to face down and sets it's image to display the back of the card.
-     */
-    public void hide()
-    {
-        isFaceUp = false;
-        setImage(backImage);
-    }
-
-    /**
-     * Returns if this card is face up or down.
-     * 
-     * @returns true if face up; otherwise false.
-     */
-    public boolean isFaceUp()
-    {
-        return isFaceUp;
-    }
-
-    /**
-     * Returns the rank of this card.
-     * 
-     * @returns the rank of this card
-     */
-    public Rank getRank()
-    {
+    public Rank getRank() {
         return rank;
     }
-
-    /**
-     * Returns the suit of this card.
-     * 
-     * @returns the suit of this card
-     */
-    public Suit getSuit(){
-        return suit;
+    
+    public boolean isShowing() {
+        return isShowing;
+    }
+    
+    public void show() {
+        isShowing = true;
+        
+        getImage().clear();
+        getImage().drawImage(frontOfCard, 0, 0);
+    }
+    
+    public void hide()
+    {
+        isShowing = false;
+        setImage(BACK_OF_CARD);
     }
     
     @Override
     public String toString(){
-        if (isFaceUp){
+        if (isShowing){
             return ""+rank+suit;
         }
         return "??";
     }
-
+    
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -124,17 +69,5 @@ public class Card extends Actor
 
         if (rank != card.rank) return false;
         return suit == card.suit;
-    }
-
-    /**
-     * Act - do whatever the Card wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        if (Greenfoot.mousePressed(this)){
-            show();
-        }
-        // Add your action code here.
     }
 }

@@ -3,63 +3,35 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Button here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jeremiah Whitehurst 
+ * @version 29-04-2024
  */
 public class Button extends Actor
 {
-    private World link;
-    GreenfootSound buttonSound = new GreenfootSound("Button_Click.mp3");
-    
-    public Button() {
-        
-    }
-     
-    // Linked button
-    public Button (int width, int height, World link) {
-        this.getImage().scale(width, height);
-        setImage(this.getImage());
-        this.link = link;
+    /**
+     * Button constructor.
+     * 
+     * Sets the dimensions of the button.
+     */
+    public Button(int width, int height) {
+        getImage().scale(width, height);
     }
     
-    // Linked buttons
-    public Button(String image, int width, int height, World link) {
-        GreenfootImage display = new GreenfootImage(image);
-        display.scale(width, height);
-        setImage(display);
-        this.link = link;
-    }
+    /**
+     * onClick - method to be ran when a Button type is clicked on.
+     */
+    public void onClick() {}
     
-    
-    // TO BE IMPLEMENTED LATER -- COMMAND BUTTONS ("HIT", "STAND", etc.)
-    public Button(String image, int width, int height) {
-        GreenfootImage display = new GreenfootImage(image);
-        display.scale(width, height);
-        setImage(display);
-    }
-    
-    public void createScreen(Item screen, int x, int y){
-        getWorld().addObject(screen, x, y);
-    }
-    
-    public World getLink() {
-        return link;
-    }
-    
-
     /**
      * Act - do whatever the Button wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
+     * 
+     * In this case, run the onClick method when a button is pressed.
      */
     public void act()
     {
-        if (Greenfoot.mouseClicked(this)) {
-            buttonSound.play();
+        if (Greenfoot.mousePressed(this)) {
             onClick();
         }
-    }
-    
-    public void onClick() {
-        
     }
 }

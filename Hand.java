@@ -4,57 +4,100 @@ import java.util.List;
 /**
  * Write a description of class Hand here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jeremiah Whitehurst 
+ * @version 29-04-2024
  */
 public class Hand extends Deck
 {
-    private  String name;
-
-    /**
-     * Constructor that intializes the instance of hand to name.
-     * 
-     * @param name a string that represents the hand.
-     */
-    public Hand(String name){
+    public static final int BLACKJACK = 40;
+    public static final int BUST = -1;
+    
+    private String name;
+    private boolean isDealer;
+    private int weight;
+    
+    public Hand(String name) {
         this.name = name;
+        if (name.equals("Dealer")) {
+            isDealer = true;
+        } else {
+            isDealer = false;
+        }
+        weight = 40;
     }
     
-    /**
-     *  Returns the name associated with this hand.
-     * 
-     * @param name a string that represents the hand.
-     */
-    public String getName()
-    {
+    public String getName() {
         return name;
     }
     
-    /**
-     *  This deals a card from the hand face up.
-     * 
-     * @returns a card from this hand that is face up.
-     */
-    public Card throwCard() {
-        return deal(true);
+    private int getWeight(Rank rank) {
+        return rank.getRank();
     }
-
+    
     /**
-     * Creates an image of this hand where all the cards are spread and, if face up,
-     * can be seen.
+     * Calculates the weight of this blackjack hand based on the cards that are face up.
      */
-    protected void setImage() 
-    {
+    public void calculateWeight(){
+        int[] weight = {0, 0};
         List<Card> cards = getCards();
+        int numOfCards = getSize();
+
+        for(Card card: cards){
+            if (!card.isShowing()){
+                continue;  // if the card is face down don't include in weight
+            }
+            int currentCardValue = getWeight(card.getRank());
+            if (card.getRank() != Rank.ACE){
+                weight[0] += currentCardValue;
+                weight[1] += currentCardValue;
+            } else {
+                if (11+Math.max(weight[0],weight[1]) > 40){
+                    int minWeight = Math.min(weight[0],weight[1]);
+                    weight[0] = 1 + minWeight;
+                    weight[1] = 11 + minWeight;
+                } else {
+                    weight[0] += 1;
+                    weight[1] += 11;
+                }
+            }
+        }
+        // calculate the weight of the hand
+        this.weight = Math.max(weight[0],weight[1]);
+        if (this.weight > 40){
+            this.weight = Math.min(weight[0],weight[1]);
+        }
+        // check for Blackjack or Bust
+        if (this.weight > 40){
+            this.weight = BUST;
+        } else if (getSize() == 2 && this.weight == 40){
+            this.weight = BLACKJACK;
+        }
+    }
+    
+    public int getWeight()
+    {
+        return weight;
+    }
+    
+    protected void setImage() {
+        List<Card> cards = getCards();
+        
         int numOfCards = cards.size();
-        if (numOfCards > 0){
+        
+        if (numOfCards > 0) {
             GreenfootImage cardImage = cards.get(0).getImage();
-            int height = cardImage.getHeight();
-            int width = cardImage.getWidth();
-            int heightInc = (int)(height * .1);
-            int widthInc = (int)(width * .1) ;
-            GreenfootImage image = new GreenfootImage(width + widthInc*numOfCards, 
-                                                        height+heightInc*numOfCards);
+            int width = 1100 / 2;
+            int height = 619;
+            int widthInc = width - 150 + (110 * numOfCards);
+            int heightInc;
+            
+            if (isDealer) {
+                heightInc = 100;
+            } else {
+                heightInc = height - 100;
+            }
+            GreenfootImage image = new GreenfootImage(widthInc, 
+                                                        heightInc);
             int x = 0;
             int y = 0;
             for(Card card: cards){
@@ -66,31 +109,21 @@ public class Hand extends Deck
         }
     }
     
-    /**
-     * Adds a aCard to this hand.
-     * 
-     * @param aCard a card to be added to this hand.
-     */
-    public void add(Card aCard){
+    public void add(Card aCard) {
         super.add(aCard);
         setImage();
+        calculateWeight();
     }
     
-    /**
-     * Removes the card aCard from this hand if it exists in the hand.
-     * 
-     * @param aCard a card to be removed from this hand.
-     * @returns true if removed; otherwise false.
-     */
     public boolean remove(Card aCard){
         boolean isDone = super.remove(aCard);
         setImage();
+        if (isDone) {
+            calculateWeight();
+        }
         return isDone;
     }
     
-    /**
-     * Makes all the cards in this hand face up.
-     */
     public void show()
     {
         List<Card> cards = getCards();
@@ -98,11 +131,9 @@ public class Hand extends Deck
             card.show();
         }
         setImage();
+        calculateWeight();
     }
     
-    /**
-     * Makes all the card in this hand face down.
-     */
     public void hide()
     {
         List<Card> cards = getCards();
@@ -110,14 +141,8 @@ public class Hand extends Deck
             card.hide();
         }
         setImage();
+        calculateWeight();
     }
     
-    /**
-     * Act - do whatever the Hand wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public void act()
-    {
-        // Add your action code here.
-    }
+    
 }
