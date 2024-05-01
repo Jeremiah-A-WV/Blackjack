@@ -21,7 +21,7 @@ public class StartButton extends Button
     public void act()
     {
         if (Greenfoot.mouseClicked(this)){
-            defaultMusic.playLoop();
+            //defaultMusic.playLoop();
             Greenfoot.setWorld(getLink());
         }
     }

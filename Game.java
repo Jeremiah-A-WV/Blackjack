@@ -22,7 +22,6 @@ public class Game extends World
     Button menu = new MenuButton("Menu_Button.png", 100, 75);
     Button hitButton = new HitButton("HitButton.png", 280, 210);
     Button standButton = new StandButton("StandButton.png", 280, 210);
-    Button dealButton = new DealButton("DealButton.png", 280, 210);
     ArrayList<BlackjackHand> inGame = new ArrayList<BlackjackHand>();
     /**
      * Constructor for objects of class Game.
@@ -30,7 +29,6 @@ public class Game extends World
      */
     public Game(Start link)
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1100, 800, 1);
         this.deck = new Deck(1);
         this.dealerCards = new BlackjackHand("Dealer");
@@ -39,7 +37,6 @@ public class Game extends World
         inGame.add(playerCards);
         setBackground(defaultGameScreen);
         addObject(menu, 1000, 30);
-        addObject(dealButton, 1000, 600);
         addObject(hitButton, 1000, 640);
         addObject(standButton, 1000, 680);
         addObject(deck, 400, 260);
