@@ -10,7 +10,7 @@ public abstract class CardGame extends Actor
 {
     private int numberOfDecks;
     private Deck gameDeck;
-
+ 
     public CardGame(int numberOfDecks){
         this.numberOfDecks = numberOfDecks;
         newGame();
