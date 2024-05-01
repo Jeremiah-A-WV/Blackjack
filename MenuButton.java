@@ -29,5 +29,6 @@ public class MenuButton extends Button
             getWorld().addObject(back, 870, 630);
             getWorld().addObject(music, 260, 550);
         }
+        
     }
 }

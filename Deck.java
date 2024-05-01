@@ -3,6 +3,7 @@ import java.util.Random;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.Collections;
 
 /**
  * Write a description of class Deck here.
@@ -39,14 +40,7 @@ public class Deck extends Actor
     }
 
     public void shuffle(){
-        Random rand = new Random();
-        int numOfCards = cards.size();
-        for(int index = 0; index < numOfCards-1; index++){
-            int swapIndex = rand.nextInt(numOfCards-index) + index;
-            Card temp = cards.get(index);
-            cards.add(index, cards.get(swapIndex));
-            cards.add(swapIndex, temp);
-        }
+        Collections.shuffle(this.cards);
     }
 
     /**
@@ -120,6 +114,11 @@ public class Deck extends Actor
      */
     public int getSize(){
         return cards.size();
+    }
+    
+    public Card getCard() {
+        Random rnd = new Random();
+        return cards.get(rnd.nextInt(getSize()));
     }
 
     /**
