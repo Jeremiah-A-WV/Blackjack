@@ -29,8 +29,8 @@ public class MusicTwoButton extends Button
         }
     }
         
-        if(!this.isTouching(Item.class)){
-                getWorld().removeObject(this);
-        }
+    if(!this.isTouching(Item.class)){
+        getWorld().removeObject(this);
+    }
     }
 }
